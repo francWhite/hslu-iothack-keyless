@@ -16,8 +16,17 @@ contract Keyless {
     
     function addAccess(address _user, string memory _door, uint256 _expDate) public {
         require(msg.sender == owner);
-
+        
         bytes32 doorHash = hashDoor(_door);
+        bool exists = false;
+        for (uint i = 0; i < accessList.length; i++) {
+            if (accessList[i].user == _user && accessList[i].door == doorHash) {
+                exists = true;
+                break;
+            }
+        }
+        require(exists == false);
+        
         accessList.push(Access(_user, doorHash, _expDate));
     }
 
