@@ -3,8 +3,7 @@ pragma solidity 0.8.17;
 contract Keyless {
     struct Access {
         address user;
-        bytes32 door;
-        uint256 expirationDate;
+        string door;
     }
 
     address public owner;
@@ -14,20 +13,19 @@ contract Keyless {
         owner = msg.sender;
     }
     
-    function addAccess(address _user, string memory _door, uint256 _expDate) public {
+    function addAccess(address _user, string memory _door) public {
         require(msg.sender == owner);
         
-        bytes32 doorHash = hashDoor(_door);
         bool exists = false;
         for (uint i = 0; i < accessList.length; i++) {
-            if (accessList[i].user == _user && accessList[i].door == doorHash) {
+            if (accessList[i].user == _user && stringEquals(accessList[i].door, _door)) {
                 exists = true;
                 break;
             }
         }
         require(exists == false);
         
-        accessList.push(Access(_user, doorHash, _expDate));
+        accessList.push(Access(_user, _door));
     }
 
     function removeAccess(address _user, string memory _door) public {
@@ -35,7 +33,7 @@ contract Keyless {
 
         uint index = 0;
         for(uint i = 0; i < accessList.length; i++) {
-            if(accessList[i].user == _user && accessList[i].door == hashDoor(_door)) {
+            if(accessList[i].user == _user && stringEquals(accessList[i].door, _door)) {
                 index = i;
                 break;
             }
@@ -51,7 +49,7 @@ contract Keyless {
         address signer = ecrecover(_hashedMessage, _v, _r, _s);
 
         for(uint i = 0; i < accessList.length; i++) {
-            if(accessList[i].user == signer && accessList[i].door == _hashedMessage) {
+            if(accessList[i].user == signer &&  hashDoor(accessList[i].door) == _hashedMessage) {
                 return true;
             }
         }
@@ -61,5 +59,9 @@ contract Keyless {
     function hashDoor(string memory _door) private pure returns (bytes32){
         bytes memory prefix = "\x19Ethereum Signed Message:\n5";
         return keccak256(abi.encodePacked(prefix, _door));
+    }
+
+    function stringEquals(string memory a, string memory b) private pure returns (bool){
+        return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
     }
 }
