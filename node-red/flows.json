@@ -1,0 +1,335 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3cc11d24.ff01a2",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "0b30b08b68212db2",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[\"0xC7387b41A326d248bb23566D56ae7745B73F4ED6\", 1234, 2]",
+        "payloadType": "json",
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "1ba997182585b6fa"
+            ]
+        ]
+    },
+    {
+        "id": "1ba997182585b6fa",
+        "type": "contract-call",
+        "z": "f6f2187d.f17ca8",
+        "name": "AddAccess",
+        "smartContract": "950dd5d683780466",
+        "contractFunction": "addAccess",
+        "senderAccount": "89382fac8a276ad4",
+        "readonlyFunction": false,
+        "weiTransfer": "",
+        "onlyEstimateGas": false,
+        "useEstimatedGasLimit": true,
+        "gasLimit": "",
+        "usePreviousBlocksGasPrice": true,
+        "gasPrice": "",
+        "fetchFullTransaction": false,
+        "x": 450,
+        "y": 320,
+        "wires": [
+            [
+                "58853db8082436e9"
+            ],
+            [
+                "58658e23cc45db04"
+            ]
+        ]
+    },
+    {
+        "id": "58853db8082436e9",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "58658e23cc45db04",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ef78c80d9a1f9ee6",
+        "type": "contract-call",
+        "z": "f6f2187d.f17ca8",
+        "name": "CheckAccess",
+        "smartContract": "950dd5d683780466",
+        "contractFunction": "checkAccess",
+        "senderAccount": "f5c69fce88ac8499",
+        "readonlyFunction": true,
+        "weiTransfer": "",
+        "onlyEstimateGas": false,
+        "useEstimatedGasLimit": true,
+        "gasLimit": "",
+        "usePreviousBlocksGasPrice": true,
+        "gasPrice": "",
+        "fetchFullTransaction": false,
+        "x": 700,
+        "y": 540,
+        "wires": [
+            [
+                "742d5196fea85b87"
+            ],
+            [
+                "be0e584442e85edf"
+            ]
+        ]
+    },
+    {
+        "id": "f997cf8bae26eb13",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "doorId",
+                "v": "1234",
+                "vt": "num"
+            },
+            {
+                "p": "userPrivateKey",
+                "v": "0xa9f06cbe491c69d39dad31b131213da897431c0348b2901cc5cafec76671c042",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 520,
+        "wires": [
+            [
+                "3e9344871b409bed"
+            ]
+        ]
+    },
+    {
+        "id": "3e9344871b409bed",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Create Signed Hash Message",
+        "func": "var web3 = new Web3();\nvar signed = web3.eth.accounts.sign(msg.doorId, msg.userPrivateKey);\nconst output = new Array(signed.messageHash, signed.v, signed.r, signed.s);\nmsg.payload = output;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "Web3",
+                "module": "web3"
+            }
+        ],
+        "x": 390,
+        "y": 540,
+        "wires": [
+            [
+                "ef78c80d9a1f9ee6",
+                "19c83f3598efb5b1"
+            ]
+        ]
+    },
+    {
+        "id": "742d5196fea85b87",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "be0e584442e85edf",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "19c83f3598efb5b1",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "a36d2f301698aca7",
+        "type": "contract-call",
+        "z": "f6f2187d.f17ca8",
+        "name": "getAccessList",
+        "smartContract": "950dd5d683780466",
+        "contractFunction": "getAccessList",
+        "senderAccount": "89382fac8a276ad4",
+        "readonlyFunction": true,
+        "weiTransfer": "",
+        "onlyEstimateGas": false,
+        "useEstimatedGasLimit": true,
+        "gasLimit": "",
+        "usePreviousBlocksGasPrice": true,
+        "gasPrice": "",
+        "fetchFullTransaction": false,
+        "x": 400,
+        "y": 800,
+        "wires": [
+            [],
+            [
+                "bae33a7dbf86eb29"
+            ]
+        ]
+    },
+    {
+        "id": "a0ba6a5861671188",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 800,
+        "wires": [
+            [
+                "a36d2f301698aca7"
+            ]
+        ]
+    },
+    {
+        "id": "bae33a7dbf86eb29",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "950dd5d683780466",
+        "type": "smart-contract",
+        "name": "Keyless",
+        "ethereumClient": "dca331707ebc7567",
+        "address": "0x69eEF2063c1bFC8D4e43366EBa2D9f88bD834Bd0",
+        "abi": "[ \t\t\t{ \t\t\t\t\"inputs\": [], \t\t\t\t\"stateMutability\": \"nonpayable\", \t\t\t\t\"type\": \"constructor\" \t\t\t}, \t\t\t{ \t\t\t\t\"inputs\": [ \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"address\", \t\t\t\t\t\t\"name\": \"_user\", \t\t\t\t\t\t\"type\": \"address\" \t\t\t\t\t}, \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"uint256\", \t\t\t\t\t\t\"name\": \"_door\", \t\t\t\t\t\t\"type\": \"uint256\" \t\t\t\t\t}, \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"uint256\", \t\t\t\t\t\t\"name\": \"_expDate\", \t\t\t\t\t\t\"type\": \"uint256\" \t\t\t\t\t} \t\t\t\t], \t\t\t\t\"name\": \"addAccess\", \t\t\t\t\"outputs\": [], \t\t\t\t\"stateMutability\": \"nonpayable\", \t\t\t\t\"type\": \"function\" \t\t\t}, \t\t\t{ \t\t\t\t\"inputs\": [ \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"bytes32\", \t\t\t\t\t\t\"name\": \"_hashedMessage\", \t\t\t\t\t\t\"type\": \"bytes32\" \t\t\t\t\t}, \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"uint8\", \t\t\t\t\t\t\"name\": \"_v\", \t\t\t\t\t\t\"type\": \"uint8\" \t\t\t\t\t}, \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"bytes32\", \t\t\t\t\t\t\"name\": \"_r\", \t\t\t\t\t\t\"type\": \"bytes32\" \t\t\t\t\t}, \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"bytes32\", \t\t\t\t\t\t\"name\": \"_s\", \t\t\t\t\t\t\"type\": \"bytes32\" \t\t\t\t\t} \t\t\t\t], \t\t\t\t\"name\": \"checkAccess\", \t\t\t\t\"outputs\": [ \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"bool\", \t\t\t\t\t\t\"name\": \"\", \t\t\t\t\t\t\"type\": \"bool\" \t\t\t\t\t} \t\t\t\t], \t\t\t\t\"stateMutability\": \"view\", \t\t\t\t\"type\": \"function\" \t\t\t}, \t\t\t{ \t\t\t\t\"inputs\": [], \t\t\t\t\"name\": \"getAccessList\", \t\t\t\t\"outputs\": [ \t\t\t\t\t{ \t\t\t\t\t\t\"components\": [ \t\t\t\t\t\t\t{ \t\t\t\t\t\t\t\t\"internalType\": \"address\", \t\t\t\t\t\t\t\t\"name\": \"user\", \t\t\t\t\t\t\t\t\"type\": \"address\" \t\t\t\t\t\t\t}, \t\t\t\t\t\t\t{ \t\t\t\t\t\t\t\t\"internalType\": \"uint256\", \t\t\t\t\t\t\t\t\"name\": \"door\", \t\t\t\t\t\t\t\t\"type\": \"uint256\" \t\t\t\t\t\t\t}, \t\t\t\t\t\t\t{ \t\t\t\t\t\t\t\t\"internalType\": \"uint256\", \t\t\t\t\t\t\t\t\"name\": \"expirationDate\", \t\t\t\t\t\t\t\t\"type\": \"uint256\" \t\t\t\t\t\t\t} \t\t\t\t\t\t], \t\t\t\t\t\t\"internalType\": \"struct Keyless.Access[]\", \t\t\t\t\t\t\"name\": \"\", \t\t\t\t\t\t\"type\": \"tuple[]\" \t\t\t\t\t} \t\t\t\t], \t\t\t\t\"stateMutability\": \"view\", \t\t\t\t\"type\": \"function\" \t\t\t}, \t\t\t{ \t\t\t\t\"inputs\": [], \t\t\t\t\"name\": \"owner\", \t\t\t\t\"outputs\": [ \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"address\", \t\t\t\t\t\t\"name\": \"\", \t\t\t\t\t\t\"type\": \"address\" \t\t\t\t\t} \t\t\t\t], \t\t\t\t\"stateMutability\": \"view\", \t\t\t\t\"type\": \"function\" \t\t\t}, \t\t\t{ \t\t\t\t\"inputs\": [ \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"address\", \t\t\t\t\t\t\"name\": \"_user\", \t\t\t\t\t\t\"type\": \"address\" \t\t\t\t\t}, \t\t\t\t\t{ \t\t\t\t\t\t\"internalType\": \"uint256\", \t\t\t\t\t\t\"name\": \"_door\", \t\t\t\t\t\t\"type\": \"uint256\" \t\t\t\t\t} \t\t\t\t], \t\t\t\t\"name\": \"removeAccess\", \t\t\t\t\"outputs\": [], \t\t\t\t\"stateMutability\": \"nonpayable\", \t\t\t\t\"type\": \"function\" \t\t\t} \t\t]"
+    },
+    {
+        "id": "89382fac8a276ad4",
+        "type": "sender-account",
+        "name": "Facility Manager",
+        "ethereumClient": "dca331707ebc7567",
+        "address": "0xE7a0E12BdB0b250DA4a4dC4E2a721f97392d92d4",
+        "managedByEthereumClient": true,
+        "transactionQueueSize": "100"
+    },
+    {
+        "id": "f5c69fce88ac8499",
+        "type": "sender-account",
+        "name": "Mitarbeiter",
+        "ethereumClient": "dca331707ebc7567",
+        "address": "0xC7387b41A326d248bb23566D56ae7745B73F4ED6",
+        "managedByEthereumClient": true,
+        "transactionQueueSize": "100"
+    },
+    {
+        "id": "dca331707ebc7567",
+        "type": "ethereum-client",
+        "name": "Ganache",
+        "url": "ws://192.168.65.2:7545"
+    }
+]
