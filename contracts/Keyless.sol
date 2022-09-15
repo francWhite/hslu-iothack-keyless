@@ -3,7 +3,7 @@ pragma solidity 0.8.17;
 contract Keyless {
     struct Access {
         address user;
-        uint256 door;
+        bytes32 door;
         uint256 expirationDate;
     }
 
@@ -14,17 +14,19 @@ contract Keyless {
         owner = msg.sender;
     }
     
-    function addAccess(address _user, uint256 _door, uint256 _expDate) public {
-        // TODO only add access if it not exists
+    function addAccess(address _user, string memory _door, uint256 _expDate) public {
         require(msg.sender == owner);
-        accessList.push(Access(_user, _door, _expDate));
+
+        bytes32 doorHash = hashDoor(_door);
+        accessList.push(Access(_user, doorHash, _expDate));
     }
 
-    function removeAccess(address _user, uint256 _door) public {
+    function removeAccess(address _user, string memory _door) public {
         require(msg.sender == owner);
+
         uint index = 0;
         for(uint i = 0; i < accessList.length; i++) {
-            if(accessList[i].user == _user && accessList[i].door == _door) {
+            if(accessList[i].user == _user && accessList[i].door == hashDoor(_door)) {
                 index = i;
                 break;
             }
@@ -37,17 +39,18 @@ contract Keyless {
     }
 
     function checkAccess(bytes32 _hashedMessage, uint8 _v, bytes32 _r, bytes32 _s) public view returns (bool) {
-        bytes memory prefix = "\x19Ethereum Signed Message:\n32";
-        bytes32 prefixedHashMessage = keccak256(abi.encodePacked(prefix, _hashedMessage));
         address signer = ecrecover(_hashedMessage, _v, _r, _s);
 
         for(uint i = 0; i < accessList.length; i++) {
-            //bytes32 doorId = keccak256(abi.encodePacked(accessList[i].door));
-            if(accessList[i].user == signer /*&& doorId == _hashedMessage*/) {
+            if(accessList[i].user == signer && accessList[i].door == _hashedMessage) {
                 return true;
             }
         }
         return false;
     }
 
+    function hashDoor(string memory _door) private pure returns (bytes32){
+        bytes memory prefix = "\x19Ethereum Signed Message:\n5";
+        return keccak256(abi.encodePacked(prefix, _door));
+    }
 }

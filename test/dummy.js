@@ -15,8 +15,8 @@ contract('Dummy', (accounts) => {
 
   it('hash door', async () => {
     const DummyInstance = await Dummy.deployed();
-    const hash = await DummyInstance.getHashedMessage.call("1234");
+    const hash = await DummyInstance.getHashedMessage.call("D1234");
 
-    assert.equal(hash, "0x25674ba4b416425b2ac42fdb33d0b0c20c59824a76e1ee4ecc04b8d48f8f6af7");
+    assert.equal(hash, "0x09e959861d94d0ed342b615f68579a61c032b7a27dd7ffc2b480a0e8e9ca9ae2");
   });
 });

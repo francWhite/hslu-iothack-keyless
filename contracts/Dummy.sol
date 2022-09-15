@@ -5,9 +5,11 @@ contract Dummy {
         return ecrecover(_hashedMessage, _v, _r, _s);
     }
 
-    function getHashedMessage(string memory _door) public pure returns (bytes32 hash) {
-        bytes memory prefix = "\x19Ethereum Signed Message:\n";
+    function getHashedMessage(string memory _door) public pure returns (bytes32) {
+        bytes memory prefix = "\x19Ethereum Signed Message:\n5";
         // bytes32 hashedMessage = keccak256(abi.encodePacked(_door));
-        return keccak256(abi.encodePacked(prefix, bytes(_door).length, _door)); 
+        // return keccak256(abi.encodePacked(prefix, bytes(_door).length, _door)); 
+        // return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n41234")); 
+        return keccak256(abi.encodePacked(prefix, _door)); 
     }
 }
