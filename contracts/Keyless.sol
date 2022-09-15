@@ -39,7 +39,7 @@ contract Keyless {
     function checkAccess(bytes32 _hashedMessage, uint8 _v, bytes32 _r, bytes32 _s) public view returns (bool) {
         bytes memory prefix = "\x19Ethereum Signed Message:\n32";
         bytes32 prefixedHashMessage = keccak256(abi.encodePacked(prefix, _hashedMessage));
-        address signer = ecrecover(prefixedHashMessage, _v, _r, _s);
+        address signer = ecrecover(_hashedMessage, _v, _r, _s);
 
         for(uint i = 0; i < accessList.length; i++) {
             //bytes32 doorId = keccak256(abi.encodePacked(accessList[i].door));
