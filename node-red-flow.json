@@ -1,0 +1,1119 @@
+[
+    {
+        "id": "f7ea84416f5e08dd",
+        "type": "tab",
+        "label": "UI",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "0616f42287d77e45",
+        "type": "http in",
+        "z": "f7ea84416f5e08dd",
+        "name": "[get] /keyless",
+        "url": "/keyless",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 260,
+        "wires": [
+            [
+                "a436792482d936d6",
+                "a66e8ee4de33a3cd",
+                "26b85bf1b9a1ec57",
+                "37fcd8b075330b56",
+                "883212b0ec497609",
+                "798f7873bbfc2813"
+            ]
+        ]
+    },
+    {
+        "id": "a66e8ee4de33a3cd",
+        "type": "ui_dropdown",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "label": "Mitarbeiter auswählen",
+        "tooltip": "",
+        "place": "Mitarbeiter auswählen",
+        "group": "03dc05605fe679ea",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Hans Muster",
+                "value": "0xC7387b41A326d248bb23566D56ae7745B73F4ED6",
+                "type": "str"
+            },
+            {
+                "label": "Ursula Meier",
+                "value": "0x810fa0f57f6F3d0Daba748FFf5269730af617a5e",
+                "type": "str"
+            },
+            {
+                "label": "Peter Müller",
+                "value": "0xB0382363A8D1aCDC18F12Ec1D1c1EE88F805Ace6",
+                "type": "str"
+            },
+            {
+                "label": "Günther Jauch",
+                "value": "0x8cd6be81b399f80D50CD9b7e80Efa4F273b945f5",
+                "type": "str"
+            },
+            {
+                "label": "Oliver Pocher",
+                "value": "0x40B9c0CA1eb2fCda6733891D808ff7b02ca549EC",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "topicType": "str",
+        "className": "",
+        "x": 600,
+        "y": 80,
+        "wires": [
+            [
+                "c8afed08d1a7831c"
+            ]
+        ]
+    },
+    {
+        "id": "a436792482d936d6",
+        "type": "ui_dropdown",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "label": "Räume",
+        "tooltip": "",
+        "place": "Räume wählen",
+        "group": "46a5db4bf97d9c59",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "multiple": true,
+        "options": [
+            {
+                "label": "AUDI MAX",
+                "value": "D1470",
+                "type": "str"
+            },
+            {
+                "label": "AUDI MIN",
+                "value": "D6240",
+                "type": "str"
+            },
+            {
+                "label": "S1.220",
+                "value": "D2245",
+                "type": "str"
+            },
+            {
+                "label": "S1.221",
+                "value": "D0885",
+                "type": "str"
+            },
+            {
+                "label": "S1.222",
+                "value": "D9247",
+                "type": "str"
+            },
+            {
+                "label": "S1.420",
+                "value": "D8062",
+                "type": "str"
+            },
+            {
+                "label": "S1.421",
+                "value": "D5446",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "topicType": "str",
+        "className": "",
+        "x": 560,
+        "y": 40,
+        "wires": [
+            [
+                "46a02a79a8e667e0"
+            ]
+        ]
+    },
+    {
+        "id": "bf73178d7d14f450",
+        "type": "ui_button",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "group": "1d6b2f2097b56487",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Zugriff speichern",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-floppy-o ",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "topicType": "str",
+        "x": 1130,
+        "y": 60,
+        "wires": [
+            [
+                "9475f9d640a2a0a2"
+            ]
+        ]
+    },
+    {
+        "id": "46a02a79a8e667e0",
+        "type": "change",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "addRooms",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 40,
+        "wires": [
+            [
+                "bf73178d7d14f450"
+            ]
+        ]
+    },
+    {
+        "id": "c8afed08d1a7831c",
+        "type": "change",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "addUser",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 80,
+        "wires": [
+            [
+                "bf73178d7d14f450"
+            ]
+        ]
+    },
+    {
+        "id": "9475f9d640a2a0a2",
+        "type": "function",
+        "z": "f7ea84416f5e08dd",
+        "name": "join",
+        "func": "var arr = [];\nfor (const room of Array.from(flow.get(\"addRooms\"))) {\n    var tuple = [];\n    tuple.push(flow.get(\"addUser\"), room);\n    arr.push(tuple);\n}\nmsg.payload = arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 60,
+        "wires": [
+            [
+                "fdaa9ab798bebe1f"
+            ]
+        ]
+    },
+    {
+        "id": "fdaa9ab798bebe1f",
+        "type": "loop",
+        "z": "f7ea84416f5e08dd",
+        "name": "grant access for each door",
+        "kind": "enum",
+        "count": "3",
+        "initial": "0",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "payload",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-val",
+        "finalPayload": "final-last",
+        "x": 1580,
+        "y": 60,
+        "wires": [
+            [
+                "039d02d286f5321f"
+            ],
+            [
+                "804dca5e0fcf5c9a"
+            ]
+        ]
+    },
+    {
+        "id": "804dca5e0fcf5c9a",
+        "type": "contract-call",
+        "z": "f7ea84416f5e08dd",
+        "name": "AddAccess",
+        "smartContract": "950dd5d683780466",
+        "contractFunction": "addAccess",
+        "senderAccount": "89382fac8a276ad4",
+        "readonlyFunction": false,
+        "weiTransfer": "",
+        "onlyEstimateGas": false,
+        "useEstimatedGasLimit": true,
+        "gasLimit": "",
+        "usePreviousBlocksGasPrice": true,
+        "gasPrice": "",
+        "fetchFullTransaction": false,
+        "x": 1590,
+        "y": 140,
+        "wires": [
+            [],
+            [
+                "fdaa9ab798bebe1f"
+            ]
+        ]
+    },
+    {
+        "id": "0f6644fe76804460",
+        "type": "ui_toast",
+        "z": "f7ea84416f5e08dd",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 2130,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "26b85bf1b9a1ec57",
+        "type": "ui_dropdown",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "label": "Mitarbeiter auswählen",
+        "tooltip": "",
+        "place": "Mitarbeiter auswählen",
+        "group": "9bf0895bfc4085ae",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Hans Muster",
+                "value": "a9f06cbe491c69d39dad31b131213da897431c0348b2901cc5cafec76671c042",
+                "type": "str"
+            },
+            {
+                "label": "Ursula Meier",
+                "value": "0xa10577be0d4a57962d387c82463b3ae8065a5043723d30eea0a6128df0ade7a2",
+                "type": "str"
+            },
+            {
+                "label": "Peter Müller",
+                "value": "0xcf033844353626afcee77e879f2f2bc8dadb71a78033deaaf89180b3b773d653",
+                "type": "str"
+            },
+            {
+                "label": "Günther Jauch",
+                "value": "0xe25ae83854102824b2fd815d7331f507d408e2674a5f50bbfe92778a94cb6526",
+                "type": "str"
+            },
+            {
+                "label": "Oliver Pocher",
+                "value": "0x58e5eb0f0ea8ce476fb23caf5e1aea490f77bd7f70a2f05c455f729ec8c0d4bf",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "topicType": "str",
+        "className": "",
+        "x": 600,
+        "y": 240,
+        "wires": [
+            [
+                "fa78de53eeb96171"
+            ]
+        ]
+    },
+    {
+        "id": "37fcd8b075330b56",
+        "type": "ui_dropdown",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "label": "Räume",
+        "tooltip": "",
+        "place": "Räume wählen",
+        "group": "d365dc2b40643e66",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "AUDI MAX",
+                "value": "D1470",
+                "type": "str"
+            },
+            {
+                "label": "AUDI MIN",
+                "value": "D6240",
+                "type": "str"
+            },
+            {
+                "label": "S1.220",
+                "value": "D2245",
+                "type": "str"
+            },
+            {
+                "label": "S1.221",
+                "value": "D0885",
+                "type": "str"
+            },
+            {
+                "label": "S1.222",
+                "value": "D9247",
+                "type": "str"
+            },
+            {
+                "label": "S1.420",
+                "value": "D8062",
+                "type": "str"
+            },
+            {
+                "label": "S1.421",
+                "value": "D5446",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "topicType": "str",
+        "className": "",
+        "x": 560,
+        "y": 280,
+        "wires": [
+            [
+                "48439b50dfedd5f8"
+            ]
+        ]
+    },
+    {
+        "id": "fb550c333b412447",
+        "type": "ui_button",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "group": "3e699a44e92323df",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Check Access",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-floppy-o ",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "topicType": "str",
+        "x": 1120,
+        "y": 260,
+        "wires": [
+            [
+                "f1c99caef8ab0206"
+            ]
+        ]
+    },
+    {
+        "id": "48439b50dfedd5f8",
+        "type": "change",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "verifyUser",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 280,
+        "wires": [
+            [
+                "fb550c333b412447"
+            ]
+        ]
+    },
+    {
+        "id": "fa78de53eeb96171",
+        "type": "change",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "verifyRooms",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 240,
+        "wires": [
+            [
+                "fb550c333b412447"
+            ]
+        ]
+    },
+    {
+        "id": "f1c99caef8ab0206",
+        "type": "function",
+        "z": "f7ea84416f5e08dd",
+        "name": "join",
+        "func": "var arr = new Array(flow.get(\"verifyRooms\"), flow.get(\"verifyUser\"));\nmsg.payload = arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 260,
+        "wires": [
+            [
+                "a7861dd8159f548a"
+            ]
+        ]
+    },
+    {
+        "id": "ad9f9b2220737362",
+        "type": "contract-call",
+        "z": "f7ea84416f5e08dd",
+        "name": "CheckAccess",
+        "smartContract": "950dd5d683780466",
+        "contractFunction": "checkAccess",
+        "senderAccount": "f5c69fce88ac8499",
+        "readonlyFunction": true,
+        "weiTransfer": "",
+        "onlyEstimateGas": false,
+        "useEstimatedGasLimit": true,
+        "gasLimit": "",
+        "usePreviousBlocksGasPrice": true,
+        "gasPrice": "",
+        "fetchFullTransaction": false,
+        "x": 1920,
+        "y": 260,
+        "wires": [
+            [],
+            [
+                "72dc6c6dda73b32e"
+            ]
+        ]
+    },
+    {
+        "id": "a7861dd8159f548a",
+        "type": "function",
+        "z": "f7ea84416f5e08dd",
+        "name": "Create Signed Hash Message",
+        "func": "var web3 = new Web3();\nvar signed = web3.eth.accounts.sign(msg.payload[1], msg.payload[0]);\nconst output = new Array(signed.messageHash, signed.v, signed.r, signed.s);\nmsg.payload = output;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "Web3",
+                "module": "web3"
+            }
+        ],
+        "x": 1610,
+        "y": 260,
+        "wires": [
+            [
+                "ad9f9b2220737362"
+            ]
+        ]
+    },
+    {
+        "id": "05a2b509a92cf0ca",
+        "type": "ui_toast",
+        "z": "f7ea84416f5e08dd",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 2390,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "72dc6c6dda73b32e",
+        "type": "function",
+        "z": "f7ea84416f5e08dd",
+        "name": "map to output string",
+        "func": "var output = \"\";\nif(msg.payload) {\n    output = \"Zugriff gewährt\";\n} else {\n    output = \"Zugriff verweigert\";\n}\nmsg.payload = output;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2160,
+        "y": 280,
+        "wires": [
+            [
+                "05a2b509a92cf0ca"
+            ]
+        ]
+    },
+    {
+        "id": "039d02d286f5321f",
+        "type": "function",
+        "z": "f7ea84416f5e08dd",
+        "name": "map access output",
+        "func": "msg.payload = \"Berechtigung vergeben\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1890,
+        "y": 100,
+        "wires": [
+            [
+                "0f6644fe76804460"
+            ]
+        ]
+    },
+    {
+        "id": "883212b0ec497609",
+        "type": "ui_dropdown",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "label": "Räume",
+        "tooltip": "",
+        "place": "Räume wählen",
+        "group": "044bb70667ce6aac",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "multiple": true,
+        "options": [
+            {
+                "label": "AUDI MAX",
+                "value": "D1470",
+                "type": "str"
+            },
+            {
+                "label": "AUDI MIN",
+                "value": "D6240",
+                "type": "str"
+            },
+            {
+                "label": "S1.220",
+                "value": "D2245",
+                "type": "str"
+            },
+            {
+                "label": "S1.221",
+                "value": "D0885",
+                "type": "str"
+            },
+            {
+                "label": "S1.222",
+                "value": "D9247",
+                "type": "str"
+            },
+            {
+                "label": "S1.420",
+                "value": "D8062",
+                "type": "str"
+            },
+            {
+                "label": "S1.421",
+                "value": "D5446",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "topicType": "str",
+        "className": "",
+        "x": 560,
+        "y": 460,
+        "wires": [
+            [
+                "8f200ec79415fee9"
+            ]
+        ]
+    },
+    {
+        "id": "8f200ec79415fee9",
+        "type": "change",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "removeRooms",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 460,
+        "wires": [
+            [
+                "8b3c4851e723a5d6"
+            ]
+        ]
+    },
+    {
+        "id": "958036736aa5e890",
+        "type": "change",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "removeUser",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 500,
+        "wires": [
+            [
+                "8b3c4851e723a5d6"
+            ]
+        ]
+    },
+    {
+        "id": "8b3c4851e723a5d6",
+        "type": "ui_button",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "group": "db519c752af7b35f",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Zugriff entziehen",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-floppy-o ",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "topicType": "str",
+        "x": 1110,
+        "y": 480,
+        "wires": [
+            [
+                "cc5721be95206c0f"
+            ]
+        ]
+    },
+    {
+        "id": "cc5721be95206c0f",
+        "type": "function",
+        "z": "f7ea84416f5e08dd",
+        "name": "join",
+        "func": "var arr = [];\nfor (const room of Array.from(flow.get(\"removeRooms\"))) {\n    var tuple = [];\n    tuple.push(flow.get(\"removeUser\"), room);\n    arr.push(tuple);\n    node.warn(tuple);\n}\nmsg.payload = arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 480,
+        "wires": [
+            [
+                "ae25a3b6209242e7"
+            ]
+        ]
+    },
+    {
+        "id": "ae25a3b6209242e7",
+        "type": "loop",
+        "z": "f7ea84416f5e08dd",
+        "name": "remove access for each door",
+        "kind": "enum",
+        "count": "3",
+        "initial": "0",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "payload",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-val",
+        "finalPayload": "final-last",
+        "x": 1610,
+        "y": 480,
+        "wires": [
+            [
+                "5456f66e4c0f63b0"
+            ],
+            [
+                "88936f3c6af8c184"
+            ]
+        ]
+    },
+    {
+        "id": "88936f3c6af8c184",
+        "type": "contract-call",
+        "z": "f7ea84416f5e08dd",
+        "name": "Remove Access",
+        "smartContract": "950dd5d683780466",
+        "contractFunction": "removeAccess",
+        "senderAccount": "89382fac8a276ad4",
+        "readonlyFunction": false,
+        "weiTransfer": "",
+        "onlyEstimateGas": false,
+        "useEstimatedGasLimit": true,
+        "gasLimit": "",
+        "usePreviousBlocksGasPrice": true,
+        "gasPrice": "",
+        "fetchFullTransaction": false,
+        "x": 1620,
+        "y": 560,
+        "wires": [
+            [],
+            [
+                "ae25a3b6209242e7"
+            ]
+        ]
+    },
+    {
+        "id": "5456f66e4c0f63b0",
+        "type": "function",
+        "z": "f7ea84416f5e08dd",
+        "name": "map access output",
+        "func": "msg.payload = \"Berechtigung entzogen\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1890,
+        "y": 480,
+        "wires": [
+            [
+                "fee2eebc11e5479a"
+            ]
+        ]
+    },
+    {
+        "id": "fee2eebc11e5479a",
+        "type": "ui_toast",
+        "z": "f7ea84416f5e08dd",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 2130,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "798f7873bbfc2813",
+        "type": "ui_dropdown",
+        "z": "f7ea84416f5e08dd",
+        "name": "",
+        "label": "Mitarbeiter auswählen",
+        "tooltip": "",
+        "place": "Mitarbeiter auswählen",
+        "group": "f40d61e3d23ff6a5",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Hans Muster",
+                "value": "0xC7387b41A326d248bb23566D56ae7745B73F4ED6",
+                "type": "str"
+            },
+            {
+                "label": "Ursula Meier",
+                "value": "0x810fa0f57f6F3d0Daba748FFf5269730af617a5e",
+                "type": "str"
+            },
+            {
+                "label": "Peter Müller",
+                "value": "0xB0382363A8D1aCDC18F12Ec1D1c1EE88F805Ace6",
+                "type": "str"
+            },
+            {
+                "label": "Günther Jauch",
+                "value": "0x8cd6be81b399f80D50CD9b7e80Efa4F273b945f5",
+                "type": "str"
+            },
+            {
+                "label": "Oliver Pocher",
+                "value": "0x40B9c0CA1eb2fCda6733891D808ff7b02ca549EC",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "topicType": "str",
+        "className": "",
+        "x": 600,
+        "y": 500,
+        "wires": [
+            [
+                "958036736aa5e890"
+            ]
+        ]
+    },
+    {
+        "id": "3d6e1ace5872bca0",
+        "type": "ui_spacer",
+        "z": "f7ea84416f5e08dd",
+        "name": "spacer",
+        "group": "46a5db4bf97d9c59",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "03dc05605fe679ea",
+        "type": "ui_group",
+        "name": "Mitarbeiter",
+        "tab": "13aa791f6747b925",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "46a5db4bf97d9c59",
+        "type": "ui_group",
+        "name": "Räume",
+        "tab": "13aa791f6747b925",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1d6b2f2097b56487",
+        "type": "ui_group",
+        "name": "",
+        "tab": "13aa791f6747b925",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "950dd5d683780466",
+        "type": "smart-contract",
+        "name": "Keyless",
+        "ethereumClient": "dca331707ebc7567",
+        "address": "0x2c0D94B704654d7cA4e58dF651a8a70D3c9Eb511",
+        "abi": "[     {       \"inputs\": [],       \"stateMutability\": \"nonpayable\",       \"type\": \"constructor\"     },     {       \"inputs\": [],       \"name\": \"owner\",       \"outputs\": [         {           \"internalType\": \"address\",           \"name\": \"\",           \"type\": \"address\"         }       ],       \"stateMutability\": \"view\",       \"type\": \"function\",       \"constant\": true     },     {       \"inputs\": [         {           \"internalType\": \"address\",           \"name\": \"_user\",           \"type\": \"address\"         },         {           \"internalType\": \"string\",           \"name\": \"_door\",           \"type\": \"string\"         }       ],       \"name\": \"addAccess\",       \"outputs\": [],       \"stateMutability\": \"nonpayable\",       \"type\": \"function\"     },     {       \"inputs\": [         {           \"internalType\": \"address\",           \"name\": \"_user\",           \"type\": \"address\"         },         {           \"internalType\": \"string\",           \"name\": \"_door\",           \"type\": \"string\"         }       ],       \"name\": \"removeAccess\",       \"outputs\": [],       \"stateMutability\": \"nonpayable\",       \"type\": \"function\"     },     {       \"inputs\": [],       \"name\": \"getAccessList\",       \"outputs\": [         {           \"components\": [             {               \"internalType\": \"address\",               \"name\": \"user\",               \"type\": \"address\"             },             {               \"internalType\": \"string\",               \"name\": \"door\",               \"type\": \"string\"             }           ],           \"internalType\": \"struct Keyless.Access[]\",           \"name\": \"\",           \"type\": \"tuple[]\"         }       ],       \"stateMutability\": \"view\",       \"type\": \"function\",       \"constant\": true     },     {       \"inputs\": [         {           \"internalType\": \"bytes32\",           \"name\": \"_hashedMessage\",           \"type\": \"bytes32\"         },         {           \"internalType\": \"uint8\",           \"name\": \"_v\",           \"type\": \"uint8\"         },         {           \"internalType\": \"bytes32\",           \"name\": \"_r\",           \"type\": \"bytes32\"         },         {           \"internalType\": \"bytes32\",           \"name\": \"_s\",           \"type\": \"bytes32\"         }       ],       \"name\": \"checkAccess\",       \"outputs\": [         {           \"internalType\": \"bool\",           \"name\": \"\",           \"type\": \"bool\"         }       ],       \"stateMutability\": \"view\",       \"type\": \"function\",       \"constant\": true     }   ]"
+    },
+    {
+        "id": "89382fac8a276ad4",
+        "type": "sender-account",
+        "name": "Facility Manager",
+        "ethereumClient": "dca331707ebc7567",
+        "address": "0xE7a0E12BdB0b250DA4a4dC4E2a721f97392d92d4",
+        "managedByEthereumClient": true,
+        "transactionQueueSize": "100"
+    },
+    {
+        "id": "9bf0895bfc4085ae",
+        "type": "ui_group",
+        "name": "Select User",
+        "tab": "083a96b39d173ceb",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d365dc2b40643e66",
+        "type": "ui_group",
+        "name": "Select Room",
+        "tab": "083a96b39d173ceb",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3e699a44e92323df",
+        "type": "ui_group",
+        "name": "Verify Button",
+        "tab": "083a96b39d173ceb",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f5c69fce88ac8499",
+        "type": "sender-account",
+        "name": "Mitarbeiter",
+        "ethereumClient": "dca331707ebc7567",
+        "address": "0xC7387b41A326d248bb23566D56ae7745B73F4ED6",
+        "managedByEthereumClient": true,
+        "transactionQueueSize": "100"
+    },
+    {
+        "id": "044bb70667ce6aac",
+        "type": "ui_group",
+        "name": "Räume",
+        "tab": "3eb416ef94234092",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "db519c752af7b35f",
+        "type": "ui_group",
+        "name": "",
+        "tab": "3eb416ef94234092",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f40d61e3d23ff6a5",
+        "type": "ui_group",
+        "name": "Mitarbeiter",
+        "tab": "3eb416ef94234092",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "13aa791f6747b925",
+        "type": "ui_tab",
+        "name": "Zugriff gewähren",
+        "icon": "fa-building-o ",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "dca331707ebc7567",
+        "type": "ethereum-client",
+        "name": "Ganache",
+        "url": "ws://192.168.65.2:7545"
+    },
+    {
+        "id": "083a96b39d173ceb",
+        "type": "ui_tab",
+        "name": "Verify",
+        "icon": "fa-unlock",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "3eb416ef94234092",
+        "type": "ui_tab",
+        "name": "Zugriff entziehen",
+        "icon": "fa-chain-broken",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
